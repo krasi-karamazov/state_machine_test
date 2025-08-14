@@ -7,12 +7,18 @@ abstract class StateMachine<State, Event> {
 
   State get currentState => _currentState;
 
-  void push(Event event) {
-    print("Current state: $_currentState, executing Event: $event");
+  void executeTransition(Event event) {
+    print(event);
     final transitionToState = transitions[_currentState]?[event];
     // If there is no state to transition to, sedi grey se
     _currentState = transitionToState ?? _currentState;
-    print("updated state: $_currentState");
+    notifyStateChange();
   }
+
+  List getAvailableEvents() {
+    return transitions[_currentState]?.keys.toList() ?? [];
+  }
+
+  void notifyStateChange();
 
 }

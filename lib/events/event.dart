@@ -1,44 +1,31 @@
-sealed class SleepyEvent{}
+sealed class SleepyEvent<T> {
+  @override
+  int get hashCode => 1;
 
-class BangFryingPan extends SleepyEvent {
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is T;
+  }
+}
+
+class BangFryingPan extends SleepyEvent<BangFryingPan> {
   @override
   String toString() => "Banging Frying Pan";
-
-  @override
-  int get hashCode => 1;
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is BangFryingPan;
-  }
 }
 
-class Knockout extends SleepyEvent {
+class LightNudge extends SleepyEvent<LightNudge> {
   @override
-  String toString() => "zzzzzzzzzzzzzzzzz";
-
-  @override
-  int get hashCode => 1;
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is Knockout;
-  }
+  String toString() => "Light Nudge";
 }
 
-class OpenMouth extends SleepyEvent {
+class Knockout extends SleepyEvent<Knockout> {
   @override
-  String toString() => "yawwwwwwn";
+  String toString() => "Knockout";
+}
 
+class OpenMouth extends SleepyEvent<OpenMouth> {
   @override
-  int get hashCode => 1;
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is OpenMouth;
-  }
+  String toString() => "OpenMouth";
 }
 

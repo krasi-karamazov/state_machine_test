@@ -1,43 +1,36 @@
-sealed class SleepyState {}
-
-class Sleep extends SleepyState {
-  @override
-  String toString() => 'Sleep';
-
+sealed class SleepyState<T> {
   @override
   int get hashCode => 1;
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is Sleep;
+    return other is T;
   }
 }
 
-class WakeUp extends SleepyState {
-  @override
-  String toString() => 'WakeUp';
+class Sleep extends SleepyState<Sleep> {
+  late bool isSleeping;
+  late bool isInPijamas;
 
   @override
-  int get hashCode => 1;
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is WakeUp;
-  }
+  String toString() => 'Sleep state';
 }
 
-class Snoring extends SleepyState {
+class WakeUp extends SleepyState<WakeUp> {
+  late bool isAwake;
+  late bool isInBed;
+  late bool isInPijamas;
+  late bool isAngry;
   @override
-  String toString() => "(loud snoring noises)";
+  String toString() => 'Wake Up state';
+}
 
+class Snoring extends SleepyState<Snoring> {
+  late bool isSleeping;
+  late bool isInBed;
+  late bool isInPijamas;
+  late bool isSnoring;
   @override
-  int get hashCode => 1;
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is Snoring;
-  }
+  String toString() => "Snoring state";
 }
