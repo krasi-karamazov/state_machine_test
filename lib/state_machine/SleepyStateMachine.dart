@@ -9,4 +9,6 @@ class SleepyStateMachine extends StateMachine<SleepyState, SleepyEvent> {
         Snoring() : {BangFryingPan() : WakeUp()},
         WakeUp(): {Knockout(): Sleep()},
       });
+
+
 }
