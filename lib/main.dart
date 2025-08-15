@@ -51,6 +51,21 @@ class _MyHomePageState extends State<MyHomePage> {
   final sleepyStateMachine = SleepyStateMachine();
   late List availableEvents = sleepyStateMachine.getAvailableEvents();
 
+  @override
+  void initState() {
+    sleepyStateMachine.executeSideEffect = (oldState, newState) {
+      if (isStateValid(newState)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Transitioned from $oldState to $newState')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Invalid transition from $oldState to $newState')),
+        );
+      }
+    };
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
